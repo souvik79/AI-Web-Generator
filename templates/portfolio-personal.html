@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Chen - Creative Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .font-display { font-family: 'Space Grotesk', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .skill-bar {
+            transition: width 2s ease-in-out;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-md z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 hero-gradient rounded-full flex items-center justify-center">
+                        <span class="text-white font-bold">AC</span>
+                    </div>
+                    <span class="text-xl font-display font-bold text-gray-800">Alex Chen</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-gray-600 hover:text-teal-600 transition">About</a>
+                    <a href="#skills" class="text-gray-600 hover:text-teal-600 transition">Skills</a>
+                    <a href="#projects" class="text-gray-600 hover:text-teal-600 transition">Projects</a>
+                    <a href="#experience" class="text-gray-600 hover:text-teal-600 transition">Experience</a>
+                    <a href="#contact" class="text-gray-600 hover:text-teal-600 transition">Contact</a>
+                </div>
+                <button class="md:hidden text-gray-600">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-20 pb-16 px-6 min-h-screen flex items-center">
+        <div class="container mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div class="inline-flex items-center bg-teal-100 rounded-full px-4 py-2 text-sm">
+                        <span class="w-2 h-2 bg-teal-600 rounded-full mr-2 animate-pulse"></span>
+                        Available for freelance work
+                    </div>
+                    <h1 class="text-5xl md:text-6xl font-display font-bold text-gray-900 leading-tight">
+                        Hi, I'm <span class="gradient-text">Alex</span>
+                        <br>Creative Developer
+                    </h1>
+                    <p class="text-xl text-gray-600 leading-relaxed">
+                        I craft beautiful, functional web experiences with modern technologies. 
+                        Passionate about clean code, intuitive design, and pushing creative boundaries.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact" class="hero-gradient text-white px-8 py-4 rounded-full hover:shadow-xl transition text-center">
+                            Get In Touch
+                        </a>
+                        <a href="#projects" class="border-2 border-teal-600 text-teal-600 px-8 py-4 rounded-full hover:bg-teal-50 transition text-center">
+                            View My Work
+                        </a>
+                    </div>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center hover:bg-teal-100 transition">
+                            <i class="fab fa-github text-gray-700"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center hover:bg-teal-100 transition">
+                            <i class="fab fa-linkedin text-gray-700"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center hover:bg-teal-100 transition">
+                            <i class="fab fa-twitter text-gray-700"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center hover:bg-teal-100 transition">
+                            <i class="fab fa-dribbble text-gray-700"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="absolute inset-0 hero-gradient rounded-3xl opacity-20 blur-3xl"></div>
+                    <div class="relative z-10">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=600&fit=crop&crop=face" 
+                             alt="Alex Chen" 
+                             class="rounded-3xl shadow-2xl w-full max-w-md mx-auto">
+                        <div class="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-xl p-4 float-animation">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-12 h-12 hero-gradient rounded-full flex items-center justify-center">
+                                    <i class="fas fa-code text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">5+ Years</p>
+                                    <p class="text-sm text-gray-600">Experience</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6 bg-white">
+        <div class="container mx-auto">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl font-display font-bold text-gray-900 mb-8 text-center">About Me</h2>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <p class="text-lg text-gray-600 leading-relaxed">
+                            I'm a full-stack developer with a passion for creating exceptional digital experiences. 
+                            My journey in web development started 5 years ago, and since then, I've worked with 
+                            startups and established companies to build scalable, user-friendly applications.
+                        </p>
+                        <p class="text-lg text-gray-600 leading-relaxed">
+                            I specialize in React, Node.js, and modern web technologies. When I'm not coding, 
+                            you'll find me exploring new design trends, contributing to open-source projects, 
+                            or capturing moments through photography.
+                        </p>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <p class="text-3xl font-bold gradient-text">50+</p>
+                                <p class="text-gray-600">Projects Completed</p>
+                            </div>
+                            <div>
+                                <p class="text-3xl font-bold gradient-text">30+</p>
+                                <p class="text-gray-600">Happy Clients</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-gradient-to-br from-pink-100 to-purple-100 p-6 rounded-2xl text-center">
+                            <i class="fas fa-laptop-code text-3xl text-purple-600 mb-3"></i>
+                            <p class="font-semibold">Clean Code</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-teal-100 to-cyan-100 p-6 rounded-2xl text-center">
+                            <i class="fas fa-mobile-alt text-3xl text-teal-600 mb-3"></i>
+                            <p class="font-semibold">Responsive</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-orange-100 to-red-100 p-6 rounded-2xl text-center">
+                            <i class="fas fa-rocket text-3xl text-orange-600 mb-3"></i>
+                            <p class="font-semibold">Fast</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-blue-100 to-indigo-100 p-6 rounded-2xl text-center">
+                            <i class="fas fa-heart text-3xl text-blue-600 mb-3"></i>
+                            <p class="font-semibold">User-Focused</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-6">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-display font-bold text-gray-900 mb-12 text-center">Skills & Technologies</h2>
+            <div class="max-w-4xl mx-auto space-y-8">
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold text-gray-700">Frontend Development</span>
+                        <span class="text-gray-600">95%</span>
+                    </div>
+                    <div class="bg-gray-200 rounded-full h-3">
+                        <div class="hero-gradient h-3 rounded-full skill-bar" style="width: 95%"></div>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold text-gray-700">Backend Development</span>
+                        <span class="text-gray-600">85%</span>
+                    </div>
+                    <div class="bg-gray-200 rounded-full h-3">
+                        <div class="hero-gradient h-3 rounded-full skill-bar" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold text-gray-700">UI/UX Design</span>
+                        <span class="text-gray-600">80%</span>
+                    </div>
+                    <div class="bg-gray-200 rounded-full h-3">
+                        <div class="hero-gradient h-3 rounded-full skill-bar" style="width: 80%"></div>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold text-gray-700">Mobile Development</span>
+                        <span class="text-gray-600">75%</span>
+                    </div>
+                    <div class="bg-gray-200 rounded-full h-3">
+                        <div class="hero-gradient h-3 rounded-full skill-bar" style="width: 75%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-wrap justify-center gap-4 mt-12">
+                <span class="px-4 py-2 bg-gray-100 rounded-full text-gray-700">React</span>
+                <span class="px-4 py-2 bg-gray-100 rounded-full text-gray-700">Vue.js</span>
+                <span class="px-4 py-2 bg-gray-100 rounded-full text-gray-700">Node.js</span>
+                <span class="px-4 py-2 bg-gray-100 rounded-full text-gray-700">TypeScript</span>
+                <span class="px-4 py-2 bg-gray-100 rounded-full text-gray-700">Python</span>
+                <span class="px-4 py-2 bg-gray-100 rounded-full text-gray-700">MongoDB</span>
+                <span class="px-4 py-2 bg-gray-100 rounded-full text-gray-700">PostgreSQL</span>
+                <span class="px-4 py-2 bg-gray-100 rounded-full text-gray-700">Tailwind CSS</span>
+                <span class="px-4 py-2 bg-gray-100 rounded-full text-gray-700">Figma</span>
+                <span class="px-4 py-2 bg-gray-100 rounded-full text-gray-700">AWS</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-6 bg-white">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-display font-bold text-gray-900 mb-12 text-center">Featured Projects</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card-hover bg-gray-50 rounded-2xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=250&fit=crop" 
+                         alt="Project 1" 
+                         class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Task Management App</h3>
+                        <p class="text-gray-600 mb-4">A collaborative task management tool with real-time updates and team features.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs px-2 py-1 bg-teal-100 text-teal-700 rounded">React</span>
+                            <span class="text-xs px-2 py-1 bg-teal-100 text-teal-700 rounded">Node.js</span>
+                            <span class="text-xs px-2 py-1 bg-teal-100 text-teal-700 rounded">MongoDB</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-teal-600 hover:text-teal-700">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                            <a href="#" class="text-gray-600 hover:text-gray-700">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-hover bg-gray-50 rounded-2xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop" 
+                         alt="Project 2" 
+                         class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">E-Commerce Platform</h3>
+                        <p class="text-gray-600 mb-4">Modern shopping experience with AI recommendations and seamless checkout.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs px-2 py-1 bg-teal-100 text-teal-700 rounded">Vue.js</span>
+                            <span class="text-xs px-2 py-1 bg-teal-100 text-teal-700 rounded">Python</span>
+                            <span class="text-xs px-2 py-1 bg-teal-100 text-teal-700 rounded">PostgreSQL</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-teal-600 hover:text-teal-700">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                            <a href="#" class="text-gray-600 hover:text-gray-700">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-hover bg-gray-50 rounded-2xl overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=250&fit=crop" 
+                         alt="Project 3" 
+                         class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Social Media Dashboard</h3>
+                        <p class="text-gray-600 mb-4">Analytics dashboard for tracking social media performance across platforms.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs px-2 py-1 bg-teal-100 text-teal-700 rounded">React</span>
+                            <span class="text-xs px-2 py-1 bg-teal-100 text-teal-700 rounded">D3.js</span>
+                            <span class="text-xs px-2 py-1 bg-teal-100 text-teal-700 rounded">Express</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-teal-600 hover:text-teal-700">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                            <a href="#" class="text-gray-600 hover:text-gray-700">
+                                <i class="fab fa-github"></i> Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6">
+        <div class="container mx-auto">
+            <div class="max-w-2xl mx-auto text-center">
+                <h2 class="text-4xl font-display font-bold text-gray-900 mb-8">Let's Work Together</h2>
+                <p class="text-xl text-gray-600 mb-12">
+                    I'm always interested in hearing about new projects and opportunities.
+                </p>
+                <div class="bg-white rounded-3xl shadow-xl p-8">
+                    <form class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <input type="text" placeholder="Your Name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-teal-500 focus:outline-none">
+                            <input type="email" placeholder="Your Email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-teal-500 focus:outline-none">
+                        </div>
+                        <input type="text" placeholder="Subject" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-teal-500 focus:outline-none">
+                        <textarea placeholder="Your Message" rows="6" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-teal-500 focus:outline-none"></textarea>
+                        <button type="submit" class="hero-gradient text-white px-8 py-4 rounded-full hover:shadow-xl transition w-full">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 px-6">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Alex Chen. Built with passion and lots of coffee ☕</p>
+        </div>
+    </footer>
+</body>
+</html>

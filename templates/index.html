@@ -1,0 +1,1989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Page Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .component-preferences-section {
+            background: #f5f7ff;
+            border-radius: 18px;
+            border: 2px solid #c7d2fe;
+            padding: 24px;
+            margin: 12px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .component-preferences-header {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .component-preferences-header h4 {
+            margin: 0;
+            color: #312e81;
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .component-preferences-header p {
+            margin: 0;
+            color: #4338ca;
+            font-size: 0.9rem;
+        }
+
+        .component-preferences-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px;
+        }
+
+        .component-card {
+            border: 1px solid rgba(99, 102, 241, 0.35);
+            border-radius: 16px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(224, 231, 255, 0.85));
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .component-card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .component-card-header h5 {
+            margin: 0;
+            font-size: 1rem;
+            color: #312e81;
+        }
+
+        .component-card-header p {
+            margin: 4px 0 0 0;
+            font-size: 0.85rem;
+            color: #4338ca;
+        }
+
+        .component-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: #312e81;
+            font-weight: 600;
+        }
+
+        .component-toggle input {
+            accent-color: #4338ca;
+        }
+
+        .component-card-body {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .component-card-body.disabled {
+            opacity: 0.45;
+        }
+
+        .component-card-body label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #312e81;
+        }
+
+        .component-card-body select {
+            border-radius: 10px;
+            border: 1px solid rgba(99, 102, 241, 0.4);
+            padding: 6px 10px;
+            font-size: 0.9rem;
+            background: white;
+            color: #312e81;
+        }
+
+        .component-variant-notes {
+            font-size: 0.78rem;
+            color: #4338ca;
+            line-height: 1.35;
+        }
+
+        .component-preferences-footer {
+            font-size: 0.85rem;
+            color: #312e81;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px dashed rgba(99, 102, 241, 0.5);
+            border-radius: 12px;
+            padding: 12px;
+        }
+        
+        .style-card-thumbnail {
+            height: 48px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #f5f5f5, #e5e5e5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .style-card-thumbnail::after,
+        .style-card-thumbnail::before {
+            content: "";
+            position: absolute;
+            border-radius: 999px;
+            opacity: 0.5;
+        }
+        
+        .style-card-thumbnail::after {
+            width: 80px;
+            height: 80px;
+            top: -20px;
+            right: -10px;
+            background: rgba(255,255,255,0.4);
+        }
+        
+        .style-card-thumbnail::before {
+            width: 50px;
+            height: 50px;
+            bottom: -15px;
+            left: 10px;
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .style-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .style-tags .style-tag {
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: #fffbeb;
+            border: 1px solid #fed7aa;
+            color: #9a3412;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+        
+        .style-card-preview {
+            margin-top: 10px;
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 12px;
+            background: white;
+            overflow: hidden;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2);
+        }
+        
+        .style-card-preview .preview-hero {
+            height: 70px;
+            border-bottom: 1px solid rgba(255,255,255,0.4);
+        }
+        
+        .style-card-preview .preview-caption {
+            padding: 10px 12px;
+        }
+        
+        .style-card-preview .preview-caption strong {
+            font-size: 0.8rem;
+            color: #7c2d12;
+            display: block;
+        }
+        
+        .style-card-preview .preview-caption span {
+            font-size: 0.7rem;
+            color: #b45309;
+        }
+        
+        .style-info-panel {
+            margin-top: 16px;
+            padding: 20px;
+            border-radius: 14px;
+            border: 2px dashed #fed7aa;
+            background: #fff7ed;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4);
+        }
+        
+        .style-info-panel h5 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #9a3412;
+            font-weight: 700;
+        }
+        
+        .style-info-panel p {
+            margin: 0;
+            color: #b45309;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .style-info-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        
+        .style-info-block h6 {
+            margin: 0 0 6px 0;
+            font-size: 0.8rem;
+            color: #b45309;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .style-font-stack {
+            font-family: var(--style-heading-font, 'Inter'), var(--style-body-font, 'Inter'), sans-serif;
+            background: white;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 8px;
+            padding: 8px 10px;
+            font-size: 0.9rem;
+            color: #7c2d12;
+            line-height: 1.3;
+        }
+        
+        .style-card[data-style="brutalist"] .preview-hero {
+            background: linear-gradient(135deg, #000000, #ff0054);
+        }
+        
+        .style-card[data-style="editorial"] .preview-hero {
+            background: linear-gradient(135deg, #0f172a, #eab308);
+        }
+        
+        .style-card[data-style="neomorphism"] .preview-hero {
+            background: linear-gradient(135deg, #ecf0f3, #5c6ac4);
+        }
+        
+        .style-card[data-style="artisan"] .preview-hero {
+            background: linear-gradient(135deg, #2c1810, #f28482);
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .main-container {
+            display: grid;
+            grid-template-columns: 0.9fr 1.8fr;
+            gap: 24px;
+            margin: 0;
+            padding: 20px;
+            height: calc(100vh - 100px);
+            overflow: hidden;
+            flex: 1;
+        }
+        
+        .form-panel {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #generate-form {
+            padding: 24px;
+            overflow-y: auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .form-submit-btn {
+            padding: 16px 24px;
+            background: #f8f9fa;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .form-submit-btn button {
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        #preview-frame {
+            transition: filter 0.3s ease;
+        }
+        
+        #preview-frame.blurred {
+            filter: blur(8px);
+        }
+        
+        .preview-panel {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        header {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            grid-column: 1 / -1;
+        }
+        
+        header h1 {
+            color: #667eea;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            margin: 20px auto;
+            display: none;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        #preview-container {
+            display: none;
+            flex: 1;
+            border: none;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+        
+        #preview-container.active {
+            display: flex;
+        }
+        
+        #preview-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+        }
+        
+        .preview-header {
+            padding: 16px 24px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e0e0e0;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        /* Conversational Interface Styles */
+        .conversation-container {
+            padding: 24px;
+            gap: 1rem;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .conversation-container::-webkit-scrollbar {
+            width: 12px;
+        }
+        
+        .conversation-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 6px;
+        }
+        
+        .conversation-container::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 6px;
+        }
+        
+        .conversation-container::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        
+        .conversation-header {
+            text-align: center;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .template-card.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+        
+        .user-message {
+            margin-left: auto;
+            text-align: right;
+        }
+        
+        .ai-message {
+            margin-right: auto;
+        }
+        
+        .message-content {
+            display: inline-block;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+        
+        .user-message .message-content {
+            background: #667eea;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .ai-message .message-content {
+            background: white;
+            color: #333;
+            border: 1px solid #e0e0e0;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .welcome-message {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .conversation-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+            min-height: 300px;
+        }
+        
+        .conversation-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .conversation-messages::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        
+        .conversation-messages::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+        
+        .conversation-messages::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        
+        .style-selection-section {
+            background: #fffaf3;
+            border-radius: 18px;
+            border: 2px solid #fed7aa;
+            padding: 24px;
+            margin: 12px 0;
+        }
+        
+        .style-selection-header {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .style-selection-header h4 {
+            margin: 0;
+            color: #9a3412;
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+        
+        .style-selection-header p {
+            width: 100%;
+            margin: 4px 0 0 0;
+            color: #b45309;
+            font-size: 0.9rem;
+        }
+        
+        .style-selector-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .style-selector-label {
+            font-weight: 600;
+            color: #9a3412;
+            font-size: 0.95rem;
+        }
+        
+        .style-randomize-btn {
+            border: none;
+            background: #fed7aa;
+            color: #9a3412;
+            font-weight: 600;
+            padding: 8px 14px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        
+        .style-randomize-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(253, 230, 138, 0.5);
+        }
+        
+        .style-chip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+            margin-top: 12px;
+        }
+        
+        .style-chip {
+            border: 2px solid rgba(250, 204, 21, 0.4);
+            border-radius: 16px;
+            padding: 14px;
+            background: #fffdf7;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        
+        .style-chip:hover {
+            border-color: #fbbf24;
+            box-shadow: 0 8px 20px rgba(251, 191, 36, 0.25);
+            transform: translateY(-2px);
+        }
+        
+        .style-chip.selected {
+            border-color: #ea580c;
+            box-shadow: 0 10px 24px rgba(234, 88, 12, 0.25), inset 0 0 0 1px rgba(234, 88, 12, 0.2);
+            background: linear-gradient(135deg, rgba(255, 250, 235, 0.95), rgba(255, 237, 213, 0.9));
+        }
+        
+        .style-chip-header {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .style-chip-name {
+            font-weight: 700;
+            color: #7c2d12;
+        }
+        
+        .style-chip-mood {
+            font-size: 0.8rem;
+            color: #b45309;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .style-chip-body {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .style-chip-palette {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .style-chip-palette span {
+            width: 18px;
+            height: 18px;
+            border-radius: 6px;
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+        
+        .style-chip-fonts {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #7c2d12;
+        }
+        
+        .style-chip-fonts span {
+            padding: 2px 6px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0,0,0,0.08);
+        }
+        
+        .style-chip-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        
+        .style-chip-tag {
+            font-size: 0.7rem;
+            color: #9a3412;
+            background: rgba(253, 230, 138, 0.6);
+            padding: 2px 8px;
+            border-radius: 999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .style-description-card {
+            background: #fff7ed;
+            border: 1px solid #fcd34d;
+            border-radius: 16px;
+            padding: 18px;
+            color: #9a3412;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            display: none;
+        }
+        
+        .style-description-card.active {
+            display: block;
+        }
+        
+        .style-description-tags {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .style-description-tags span {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(253, 230, 138, 0.5);
+            color: #9a3412;
+            border: 1px solid rgba(250, 204, 21, 0.5);
+        }
+
+        @media (max-width: 900px) {
+            .style-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .reference-section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+            overflow: visible;
+            margin-top: 16px;
+        }
+        
+        .reference-header {
+            padding: 12px 16px;
+            background: #e9ecef;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #495057;
+            transition: background 0.2s;
+        }
+        
+        .reference-header:hover {
+            background: #dee2e6;
+        }
+        
+        .reference-content {
+            padding: 16px;
+            border-top: 1px solid #e0e0e0;
+            overflow: visible;
+        }
+        
+        .message-input-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+            margin-top: 12px;
+        }
+        
+        .template-selection-section.hidden {
+            display: none;
+        }
+        
+        .interactive-enhancements-section {
+            background: #eef2ff;
+            border: 2px solid #c7d2fe;
+            border-radius: 18px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+        
+        .interactive-enhancements-header h4 {
+            margin: 0;
+            color: #312e81;
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+        
+        .interactive-enhancements-header p {
+            margin: 6px 0 0 0;
+            color: #4338ca;
+            font-size: 0.92rem;
+        }
+        
+        .interactive-enhancements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+            margin-top: 16px;
+        }
+        
+        .interactive-card {
+            background: white;
+            border: 1px solid #d4d4ff;
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            box-shadow: 0 6px 14px rgba(79, 70, 229, 0.08);
+        }
+        
+        .interactive-card.active {
+            border-color: #4f46e5;
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.18);
+        }
+        
+        .interactive-card-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        
+        .interactive-card h5 {
+            margin: 0;
+            font-size: 1rem;
+            color: #312e81;
+        }
+        
+        .interactive-card p {
+            margin: 0;
+            color: #4c1d95;
+            font-size: 0.9rem;
+        }
+        
+        .interactive-card ul {
+            margin: 0;
+            padding-left: 18px;
+            color: #4c1d95;
+            font-size: 0.85rem;
+        }
+        
+        .interactive-toggle {
+            border: none;
+            background: #e0e7ff;
+            color: #312e81;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        
+        .interactive-card.active .interactive-toggle {
+            background: #312e81;
+            color: white;
+        }
+        
+        .interactive-enhancements-summary {
+            margin-top: 12px;
+            font-size: 0.9rem;
+            color: #4338ca;
+        }
+        
+        .system-message {
+            text-align: center;
+            margin: 16px 0;
+            color: #666;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 1200px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .form-panel {
+                position: relative;
+                top: 0;
+                height: auto;
+                max-height: none;
+            }
+            
+            .preview-panel {
+                height: 600px;
+            }
+        }
+    </style>
+    <script id="style-presets-data" type="application/json">{{ style_presets_json|safe }}</script>
+    <script id="component-library-data" type="application/json">{{ component_library_json|safe }}</script>
+    <script id="interactive-enhancements-data" type="application/json">{{ interactive_enhancements_json|safe }}</script>
+</head>
+<body>
+    <header>
+        <h1>Web Page Generator</h1>
+        <p>Create professional websites with AI</p>
+    </header>
+    
+    <div class="main-container">
+        <div class="form-panel">
+            <div class="conversation-container">
+                <div class="conversation-header">
+                    <h3>🤖 Website Builder Chat</h3>
+                    <p>Tell me what kind of website you want to create, and I'll help you build it step by step!</p>
+                </div>
+                
+                <!-- Template Selection (shown at start) -->
+                <div id="template-selection" class="template-selection-section">
+                    <div class="template-selection-header">
+                        <h4>📋 Choose a template to get started:</h4>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="template-card border-2 border-gray-300 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition-colors" data-template="business-agency">
+                            <div class="aspect-w-16 aspect-h-12 mb-3">
+                                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=300&h=200&fit=crop" alt="Business Template" class="w-full h-32 object-cover rounded">
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Business Agency</h4>
+                            <p class="text-sm text-gray-600">Perfect for agencies, consultancies, and professional services</p>
+                        </div>
+                        <div class="template-card border-2 border-gray-300 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition-colors" data-template="portfolio-personal">
+                            <div class="aspect-w-16 aspect-h-12 mb-3">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=200&fit=crop&crop=face" alt="Portfolio Template" class="w-full h-32 object-cover rounded">
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Personal Portfolio</h4>
+                            <p class="text-sm text-gray-600">Showcase your work, skills, and personal brand</p>
+                        </div>
+                        <div class="template-card border-2 border-gray-300 rounded-lg p-4 cursor-pointer hover:border-blue-500 transition-colors" data-template="saas-landing">
+                            <div class="aspect-w-16 aspect-h-12 mb-3">
+                                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=300&h=200&fit=crop" alt="SaaS Template" class="w-full h-32 object-cover rounded">
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-2">SaaS Landing</h4>
+                            <p class="text-sm text-gray-600">Modern landing page for SaaS products and services</p>
+                        </div>
+                    </div>
+                    <input type="hidden" id="selected-template" name="selected_template" value="">
+                </div>
+                
+                <!-- Style Selection -->
+                <div id="style-selection" class="style-selection-section">
+                    <div class="style-selection-header">
+                        <div>
+                            <h4>🎨 Design style presets</h4>
+                            <p>Each preset sends curated colors, fonts, and mood to the AI so the final site feels intentional. Tap a card to preview its personality.</p>
+                        </div>
+                        <div class="style-selector-controls">
+                            <span class="style-selector-label">Pick a preset</span>
+                            <button type="button" id="style-randomize-btn" class="style-randomize-btn">✨ Surprise me</button>
+                        </div>
+                    </div>
+                    <div id="style-chip-grid" class="style-chip-grid">
+                        <!-- Chips injected by JS -->
+                    </div>
+                    <div id="style-description-card" class="style-description-card">
+                        <strong id="style-description-title" class="block text-amber-900 mb-1">Editorial Luxe</strong>
+                        <p id="style-description-text" class="m-0 text-sm text-amber-800">Magazine-inspired typography with refined spacing and a luxe palette.</p>
+                        <div class="style-description-tags" id="style-description-tags"></div>
+                    </div>
+                    <input type="hidden" id="selected-style" name="style_preset" value="editorial">
+                </div>
+
+                <!-- Component Preferences -->
+                <div id="component-preferences" class="component-preferences-section">
+                    <div class="component-preferences-header">
+                        <h4>🧩 Section building blocks</h4>
+                        <p>Tell the AI which sections you want and how they should feel. Mix and match hero, testimonials, pricing, and timeline patterns.</p>
+                    </div>
+                    <div id="component-preferences-grid" class="component-preferences-grid">
+                        {% if component_library %}
+                            {% for section_key, section in component_library.items() %}
+                                <div class="component-card" data-section="{{ section_key }}">
+                                    <div class="component-card-header">
+                                        <div>
+                                            <h5>{{ section.label }}</h5>
+                                            <p>{{ section.description }}</p>
+                                        </div>
+                                        <label class="component-toggle">
+                                            <input type="checkbox" data-component-toggle="{{ section_key }}" checked>
+                                            Include
+                                        </label>
+                                    </div>
+                                    <div class="component-card-body">
+                                        <label>Variant style</label>
+                                        <select data-component-select="{{ section_key }}">
+                                            {% for variant in section.variants %}
+                                                <option value="{{ variant.id }}" {% if loop.first %}selected{% endif %}>
+                                                    {{ variant.name }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                        <div class="component-variant-notes" data-component-notes="{{ section_key }}">
+                                            {% if section.variants and section.variants[0].visual_notes %}
+                                                {{ section.variants[0].visual_notes }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p class="text-sm text-indigo-700">Component options will appear after the page loads.</p>
+                        {% endif %}
+                    </div>
+                    <div class="component-preferences-footer">
+                        Tip: toggle off sections you don’t need or switch variants (e.g., timeline vs. milestones) before you hit “Send”. You can revisit these preferences any time.
+                    </div>
+                    <input type="hidden" id="preferred-sections-input" name="preferred_sections" value="">
+                </div>
+                
+                <!-- Interactive Enhancements -->
+                <div id="interactive-enhancements" class="interactive-enhancements-section">
+                    <div class="interactive-enhancements-header">
+                        <h4>✨ Interactive enhancements</h4>
+                        <p>Layer in subtle motion and micro-interactions. Pick a few and the AI will explain where they live and how to build them.</p>
+                    </div>
+                    <div id="interactive-enhancements-grid" class="interactive-enhancements-grid">
+                        {% if interactive_enhancements %}
+                            {% for enh_id, spec in interactive_enhancements.items() %}
+                                <div class="interactive-card" data-enhancement-id="{{ enh_id }}">
+                                    <div class="interactive-card-header">
+                                        <div>
+                                            <h5>{{ spec.label or enh_id }}</h5>
+                                            <p>{{ spec.purpose }}</p>
+                                        </div>
+                                        <button type="button" class="interactive-toggle" data-interactive-toggle="{{ enh_id }}">Add layer</button>
+                                    </div>
+                                    <ul>
+                                        <li><strong>Placement:</strong> {{ spec.placement }}</li>
+                                        <li><strong>Build:</strong> {{ spec.implementation }}</li>
+                                    </ul>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p class="text-sm text-indigo-700">Interactive options will appear after the page loads.</p>
+                        {% endif %}
+                    </div>
+                    <div class="interactive-enhancements-summary" id="interactive-enhancements-summary">
+                        No interactive layers selected yet. Keep it simple, or add one when you're ready.
+                    </div>
+                    <input type="hidden" id="interactive-enhancements-input" name="interactive_enhancements" value="[]">
+                </div>
+                
+                <!-- Conversation Messages -->
+                <div id="conversation-messages" class="conversation-messages">
+                    <div class="welcome-message">
+                        <div class="message ai-message">
+                            <div class="message-content">
+                                👋 Welcome! I'm your AI website builder. First, choose a template above, then tell me what you'd like to create!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Reference Files Section (collapsible) -->
+                <div id="reference-section" class="reference-section">
+                    <div class="reference-header" onclick="toggleReferenceSection()">
+                        <span>📎 Reference Files & Links (Optional)</span>
+                        <span id="reference-toggle">▼</span>
+                    </div>
+                    <div id="reference-content" class="reference-content">
+                        <!-- Profile Image Section (for portfolio/personal websites) -->
+                        <div class="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                            <h5 class="text-sm font-semibold text-blue-800 mb-2">👤 Profile Image (Optional)</h5>
+                            <p class="text-xs text-blue-600 mb-2">For portfolio/personal websites, upload your photo or provide a link</p>
+                            <div class="flex gap-2 mb-2">
+                                <button type="button" id="add-profile-btn" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold py-1 px-3 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
+                                    📷 Upload Profile
+                                </button>
+                                <input type="text" id="profile-url-input" class="flex-1 px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Or paste image URL...">
+                            </div>
+                            <div id="profile-preview" class="hidden">
+                                <img id="profile-img-preview" class="w-16 h-16 rounded-full object-cover border-2 border-blue-300" src="" alt="Profile preview">
+                                <button type="button" id="remove-profile-btn" class="mt-1 text-xs text-red-600 hover:text-red-800">Remove</button>
+                            </div>
+                            <input type="file" id="profile-file-input" accept="image/*" style="display: none;">
+                        </div>
+                        
+                        <!-- Reference Website Link -->
+                        <div class="mb-4">
+                            <label for="reference-url" class="block text-sm font-medium text-gray-700 mb-1">Reference Website URL:</label>
+                            <input type="url" id="reference-url" name="reference_url" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g., https://example.com">
+                            <div id="url-info" class="text-sm text-gray-600 mt-1"></div>
+                        </div>
+                        
+                        <!-- File Upload Section -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Upload Files:</label>
+                            <div class="flex gap-2 mb-3">
+                                <button type="button" id="add-file-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors">
+                                    + Add File
+                                </button>
+                                <button type="button" id="clear-files-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors" style="display: none;">
+                                    Clear All
+                                </button>
+                            </div>
+                            
+                            <!-- Hidden file input for adding files -->
+                            <input type="file" id="reference-file-input" name="reference_files" accept=".pdf,.txt,.doc,.docx,.jpg,.jpeg,.png,.gif,.md" style="display: none;">
+                            
+                            <!-- List of uploaded files -->
+                            <div id="files-list" class="space-y-2"></div>
+                            <div id="files-info" class="text-sm text-gray-600 mt-2"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Message Input -->
+                <div class="message-input-container">
+                    <textarea id="message-input" placeholder="Describe the website you want to create..." rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"></textarea>
+                    <div class="message-input-actions">
+                        <button id="send-message-btn" type="button" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
+                            🚀 Send
+                        </button>
+                        <button id="reference-toggle-btn" type="button" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 transition-colors">
+                            📎 Add Files
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="loader" id="loader"></div>
+            <div id="error-message" class="mt-4 text-red-500 text-center hidden"></div>
+        </div>
+        
+        <div class="preview-panel">
+            <div class="preview-header">
+                <span>Live Preview</span>
+            </div>
+            <div id="preview-container">
+                <iframe id="preview-frame"></iframe>
+            </div>
+            <div id="button-panel" style="padding: 16px 24px; background: #f8f9fa; border-top: 1px solid #e0e0e0; display: none; gap: 12px; flex-wrap: wrap;">
+                <button id="download-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors">
+                    ⬇️ Download
+                </button>
+                <button id="open-window-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors">
+                    🔗 Open Window
+                </button>
+                <button id="new-prompt-btn" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 transition-colors">
+                    ➕ New Prompt
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const stylePresetsEl = document.getElementById('style-presets-data');
+            const componentLibraryEl = document.getElementById('component-library-data');
+            const interactiveEnhancementsEl = document.getElementById('interactive-enhancements-data');
+            let stylePresets = {};
+            let componentLibrary = {};
+            let interactiveEnhancements = {};
+            try {
+                stylePresets = JSON.parse(stylePresetsEl?.textContent || '{}');
+            } catch (err) {
+                console.error('Failed to parse style presets JSON', err);
+            }
+            if (!stylePresets || Object.keys(stylePresets).length === 0) {
+                console.warn('No style presets found; defaulting to fallback preset.');
+                stylePresets = {
+                    editorial: {
+                        label: 'Editorial Luxe',
+                        description: 'Magazine-inspired typography with refined spacing.',
+                        palette: ['#0f172a', '#f8fafc', '#eab308'],
+                        fonts: ['Playfair Display', 'Source Sans Pro'],
+                        mood: ['refined', 'magazine-like', 'balanced'],
+                        tags: ['Columns', 'Serif', 'Feature']
+                    }
+                };
+            }
+            try {
+                componentLibrary = JSON.parse(componentLibraryEl?.textContent || '{}');
+            } catch (err) {
+                console.error('Failed to parse component library JSON', err);
+            }
+            if (!componentLibrary || Object.keys(componentLibrary).length === 0) {
+                console.warn('No component library found; using fallback definitions.');
+                componentLibrary = {
+                    hero: {
+                        label: 'Hero Sections',
+                        description: 'Above-the-fold intros with strong copy and visuals.',
+                        variants: [
+                            {
+                                id: 'hero_split_image',
+                                name: 'Split Layout',
+                                visual_notes: 'Two-column layout with stats and bold CTAs.'
+                            },
+                            {
+                                id: 'hero_centered_card',
+                                name: 'Centered Spotlight',
+                                visual_notes: 'Centered stack with floating product card.'
+                            }
+                        ]
+                    },
+                    testimonials: {
+                        label: 'Testimonials',
+                        description: 'Social proof layouts to build trust.',
+                        variants: [
+                            {
+                                id: 'testimonials_cards',
+                                name: 'Card Grid',
+                                visual_notes: 'Grid of quote cards with avatars.'
+                            },
+                            {
+                                id: 'testimonials_carousel',
+                                name: 'Carousel',
+                                visual_notes: 'Single quote with slider thumbnails.'
+                            }
+                        ]
+                    },
+                    pricing: {
+                        label: 'Pricing Tables',
+                        description: 'Compare packages and highlight the best offer.',
+                        variants: [
+                            {
+                                id: 'pricing_three_tiers',
+                                name: 'Three Tiers',
+                                visual_notes: 'Three cards with middle plan highlighted.'
+                            },
+                            {
+                                id: 'pricing_cards_split',
+                                name: 'Card Split',
+                                visual_notes: 'Starter vs Pro cards with supporting quote.'
+                            }
+                        ]
+                    },
+                    timeline: {
+                        label: 'Timeline / Process',
+                        description: 'Explain steps or milestones visually.',
+                        variants: [
+                            {
+                                id: 'timeline_steps_horizontal',
+                                name: 'Horizontal Steps',
+                                visual_notes: 'Numbered chips connected with gradient line.'
+                            },
+                            {
+                                id: 'timeline_vertical_cards',
+                                name: 'Vertical Cards',
+                                visual_notes: 'Stacked cards alternating left/right.'
+                            }
+                        ]
+                    }
+                };
+            }
+            // expose for debugging
+            window.componentLibrary = componentLibrary;
+            try {
+                interactiveEnhancements = JSON.parse(interactiveEnhancementsEl?.textContent || '{}');
+            } catch (err) {
+                console.error('Failed to parse interactive enhancements JSON', err);
+            }
+            if (!interactiveEnhancements || Object.keys(interactiveEnhancements).length === 0) {
+                console.warn('No interactive enhancements found; using fallback definitions.');
+                interactiveEnhancements = {
+                    animated_counters: {
+                        label: 'Animated Counters',
+                        purpose: 'Highlight impact metrics with number animations.',
+                        placement: 'Hero stats, KPI band, or social proof section.',
+                        implementation: 'Use data attributes and IntersectionObserver to animate counting.'
+                    }
+                };
+            }
+            
+            // Elements
+            const loader = document.getElementById('loader');
+            const errorMessage = document.getElementById('error-message');
+            const previewContainer = document.getElementById('preview-container');
+            const previewFrame = document.getElementById('preview-frame');
+            const buttonPanel = document.getElementById('button-panel');
+            const downloadBtn = document.getElementById('download-btn');
+            const openWindowBtn = document.getElementById('open-window-btn');
+            const newPromptBtn = document.getElementById('new-prompt-btn');
+            const interactiveEnhancementsGrid = document.getElementById('interactive-enhancements-grid');
+            const interactiveEnhancementsInput = document.getElementById('interactive-enhancements-input');
+            const interactiveEnhancementsSummary = document.getElementById('interactive-enhancements-summary');
+            
+            // Conversational elements
+            const messageInput = document.getElementById('message-input');
+            const sendBtn = document.getElementById('send-message-btn');
+            const conversationMessages = document.getElementById('conversation-messages');
+            const templateCards = document.querySelectorAll('.template-card');
+            const selectedTemplateInput = document.getElementById('selected-template');
+            const templateSelection = document.getElementById('template-selection');
+            const styleChipGrid = document.getElementById('style-chip-grid');
+            const selectedStyleInput = document.getElementById('selected-style');
+            const styleDescriptionTitle = document.getElementById('style-description-title');
+            const styleDescriptionText = document.getElementById('style-description-text');
+            const styleDescriptionCard = document.getElementById('style-description-card');
+            const styleDescriptionTags = document.getElementById('style-description-tags');
+            const styleRandomizeBtn = document.getElementById('style-randomize-btn');
+            const componentPreferencesGrid = document.getElementById('component-preferences-grid');
+            const preferredSectionsInput = document.getElementById('preferred-sections-input');
+            
+            // Reference elements
+            const referenceSection = document.getElementById('reference-section');
+            const referenceToggleBtn = document.getElementById('reference-toggle-btn');
+            const referenceContent = document.getElementById('reference-content');
+            const referenceToggle = document.getElementById('reference-toggle');
+            const referenceUrlInput = document.getElementById('reference-url');
+            const urlInfo = document.getElementById('url-info');
+            const addFileBtn = document.getElementById('add-file-btn');
+            const clearFilesBtn = document.getElementById('clear-files-btn');
+            const referenceFileInput = document.getElementById('reference-file-input');
+            const filesList = document.getElementById('files-list');
+            const filesInfo = document.getElementById('files-info');
+            
+            // Profile image elements
+            const addProfileBtn = document.getElementById('add-profile-btn');
+            const profileFileInput = document.getElementById('profile-file-input');
+            const profileUrlInput = document.getElementById('profile-url-input');
+            const profilePreview = document.getElementById('profile-preview');
+            const profileImgPreview = document.getElementById('profile-img-preview');
+            const removeProfileBtn = document.getElementById('remove-profile-btn');
+            
+            // State
+            let generatedHTML = '';
+            let uploadedFiles = [];
+            let profileImageData = null; // Store profile image data
+            let conversationState = 'template-selection'; // template-selection, initial-prompt, conversation
+            let isFirstGeneration = true;
+            let isRestyling = false;
+            let preferredSectionsState = {};
+            let selectedInteractiveEnhancements = [];
+
+            const styleKeys = Object.keys(stylePresets);
+            function getPresetLabel(styleKey) {
+                const preset = stylePresets[styleKey];
+                return preset?.label || preset?.name || styleKey;
+            }
+
+            function updateStyleDescription(styleKey) {
+                if (!stylePresets[styleKey] || !styleDescriptionCard) return;
+                const preset = stylePresets[styleKey];
+                styleDescriptionTitle.textContent = getPresetLabel(styleKey);
+                styleDescriptionText.textContent = preset.description || '';
+                styleDescriptionCard.classList.add('active');
+                if (styleDescriptionTags) {
+                    const tags = preset.tags || preset.mood || [];
+                    styleDescriptionTags.innerHTML = tags.map(tag => `<span>${tag}</span>`).join('');
+                }
+            }
+
+            function highlightSelectedChip(styleKey) {
+                if (!styleChipGrid) return;
+                styleChipGrid.querySelectorAll('.style-chip').forEach(chip => {
+                    chip.classList.toggle('selected', chip.dataset.style === styleKey);
+                });
+            }
+
+            function setSelectedStyle(styleKey, { announce = false, restyle = false } = {}) {
+                if (!selectedStyleInput || !stylePresets[styleKey]) return;
+                selectedStyleInput.value = styleKey;
+                updateStyleDescription(styleKey);
+                highlightSelectedChip(styleKey);
+                if (announce) {
+                    addSystemMessage(`🎨 Style locked: ${getPresetLabel(styleKey)}.`);
+                }
+                if (restyle && generatedHTML) {
+                    restyleSite(styleKey);
+                }
+            }
+
+            function renderStyleChips() {
+                if (!styleChipGrid) return;
+                styleChipGrid.innerHTML = '';
+                styleKeys.forEach(styleKey => {
+                    const preset = stylePresets[styleKey];
+                    const chip = document.createElement('button');
+                    chip.type = 'button';
+                    chip.className = 'style-chip';
+                    chip.dataset.style = styleKey;
+                    const paletteSwatches = (preset.palette || []).slice(0, 4).map(color => `<span style="background:${color}"></span>`).join('');
+                    const fontTokens = (preset.fonts || []).slice(0, 2).map(font => `<span>${font.split(' ')[0]}</span>`).join('');
+                    const tagTokens = (preset.tags || preset.mood || []).slice(0, 3).map(tag => `<span class="style-chip-tag">${tag}</span>`).join('');
+                    chip.innerHTML = `
+                        <div class="style-chip-header">
+                            <span class="style-chip-name">${getPresetLabel(styleKey)}</span>
+                            <span class="style-chip-mood">${(preset.mood || []).slice(0, 2).join(' · ')}</span>
+                        </div>
+                        <div class="style-chip-body">
+                            <div class="style-chip-palette">${paletteSwatches}</div>
+                            <div class="style-chip-fonts">${fontTokens}</div>
+                        </div>
+                        <div class="style-chip-tags">${tagTokens}</div>
+                    `;
+                    chip.addEventListener('click', () => {
+                        const alreadySelected = selectedStyleInput.value === styleKey;
+                        setSelectedStyle(styleKey, { restyle: !!generatedHTML && !alreadySelected });
+                    });
+                    styleChipGrid.appendChild(chip);
+                });
+            }
+
+            renderStyleChips();
+            const defaultStyle = (selectedStyleInput?.value && stylePresets[selectedStyleInput.value])
+                ? selectedStyleInput.value
+                : styleKeys[0] || 'editorial';
+            setSelectedStyle(defaultStyle);
+
+            if (styleRandomizeBtn && styleKeys.length > 1) {
+                styleRandomizeBtn.addEventListener('click', () => {
+                    const currentStyle = selectedStyleInput.value;
+                    const options = styleKeys.filter(key => key !== currentStyle);
+                    const randomStyle = options[Math.floor(Math.random() * options.length)];
+                    setSelectedStyle(randomStyle, { announce: true, restyle: !!generatedHTML });
+                });
+            }
+
+            function updateInteractiveEnhancementsSummary() {
+                if (!interactiveEnhancementsSummary) return;
+                if (!selectedInteractiveEnhancements.length) {
+                    interactiveEnhancementsSummary.textContent = "No interactive layers selected yet. Keep it simple, or add one when you're ready.";
+                    return;
+                }
+                const labels = selectedInteractiveEnhancements
+                    .map(id => interactiveEnhancements[id]?.label || id)
+                    .join(', ');
+                interactiveEnhancementsSummary.textContent =
+                    `✨ ${selectedInteractiveEnhancements.length} interactive touch${selectedInteractiveEnhancements.length > 1 ? 'es' : ''}: ${labels}. ` +
+                    `We'll explain where they belong and how they elevate the experience.`;
+            }
+
+            function syncInteractiveEnhancementCards() {
+                if (!interactiveEnhancementsGrid) return;
+                interactiveEnhancementsGrid.querySelectorAll('.interactive-card').forEach(card => {
+                    const enhId = card.dataset.enhancementId;
+                    const isActive = selectedInteractiveEnhancements.includes(enhId);
+                    card.classList.toggle('active', isActive);
+                    const toggleBtn = card.querySelector('[data-interactive-toggle]');
+                    if (toggleBtn) {
+                        toggleBtn.textContent = isActive ? 'Added' : 'Add layer';
+                    }
+                });
+                if (interactiveEnhancementsInput) {
+                    interactiveEnhancementsInput.value = JSON.stringify(selectedInteractiveEnhancements);
+                }
+                updateInteractiveEnhancementsSummary();
+            }
+
+            function toggleInteractiveEnhancement(enhId) {
+                if (!enhId) return;
+                const index = selectedInteractiveEnhancements.indexOf(enhId);
+                if (index >= 0) {
+                    selectedInteractiveEnhancements.splice(index, 1);
+                } else {
+                    selectedInteractiveEnhancements.push(enhId);
+                }
+                syncInteractiveEnhancementCards();
+            }
+
+            function renderInteractiveEnhancements() {
+                if (!interactiveEnhancementsGrid) return;
+                interactiveEnhancementsGrid.innerHTML = '';
+                const entries = Object.entries(interactiveEnhancements);
+                if (!entries.length) {
+                    interactiveEnhancementsGrid.innerHTML = '<p class="text-sm text-indigo-700">Interactive options will appear after the page loads.</p>';
+                    updateInteractiveEnhancementsSummary();
+                    return;
+                }
+                entries.forEach(([id, spec]) => {
+                    const card = document.createElement('div');
+                    card.className = 'interactive-card';
+                    card.dataset.enhancementId = id;
+                    card.innerHTML = `
+                        <div class="interactive-card-header">
+                            <div>
+                                <h5>${spec.label || id}</h5>
+                                <p>${spec.purpose || ''}</p>
+                            </div>
+                            <button type="button" class="interactive-toggle" data-interactive-toggle="${id}">Add layer</button>
+                        </div>
+                        <ul>
+                            <li><strong>Placement:</strong> ${spec.placement || 'Use where it reinforces the story.'}</li>
+                            <li><strong>Build:</strong> ${spec.implementation || 'Keep it lightweight with CSS + minimal JS.'}</li>
+                        </ul>
+                    `;
+                    interactiveEnhancementsGrid.appendChild(card);
+                });
+                interactiveEnhancementsGrid.querySelectorAll('[data-interactive-toggle]').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        toggleInteractiveEnhancement(btn.dataset.interactiveToggle);
+                    });
+                });
+                syncInteractiveEnhancementCards();
+            }
+
+            renderInteractiveEnhancements();
+
+            async function restyleSite(styleKey) {
+                if (!generatedHTML || isRestyling) return;
+                isRestyling = true;
+                showLoader();
+                
+                const preset = stylePresets[styleKey];
+                const friendlyName = preset ? preset.name : styleKey;
+                addSystemMessage(`🎨 Applying ${friendlyName} styling...`);
+                
+                try {
+                    const descriptivePrompt = preset
+                        ? `Restyle the current site using the "${friendlyName}" preset. Emphasize palette ${preset.palette.join(', ')}, typography ${preset.fonts.join(' + ')}, and mood keywords ${preset.mood.join(', ')} while keeping the structure intact.`
+                        : `Restyle the current site using the ${friendlyName} preset. Reapply colors, typography, and UI accents consistently.`;
+                    
+                    const response = await updateWebsite(descriptivePrompt);
+                    
+                    if (response.success) {
+                        generatedHTML = response.content;
+                        updatePreview(generatedHTML);
+                        addAIMessage(`✨ Switched to ${friendlyName}. Let me know if you’d like more tweaks or try another style.`);
+                    } else {
+                        showError(response.error || 'Failed to restyle the site');
+                    }
+                } catch (error) {
+                    console.error('Restyle error:', error);
+                    showError('Failed to apply the new style. Please try again.');
+                } finally {
+                    hideLoader();
+                    isRestyling = false;
+                }
+            }
+
+            // Template selection
+            templateCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove previous selection
+                    templateCards.forEach(c => c.classList.remove('selected'));
+                    
+                    // Add selection to clicked card
+                    this.classList.add('selected');
+                    
+                    // Update hidden input
+                    const template = this.dataset.template;
+                    selectedTemplateInput.value = template;
+                    
+                    // Show template info
+                    const templateInfo = {
+                        'business-agency': '🏢 Business Agency Template - Professional design with service showcase, portfolio, and client testimonials.',
+                        'portfolio-personal': '👨‍💻 Personal Portfolio Template - Modern design with skills showcase, projects gallery, and contact form.',
+                        'saas-landing': '🚀 SaaS Landing Template - Modern product landing with features, pricing, and customer testimonials.'
+                    };
+                    
+                    // Add AI message about template selection
+                    addAIMessage(`Great choice! I'll use the ${templateInfo[template].split(' - ')[1]} Now tell me what you'd like to create with this template.`);
+                    
+                    // Hide template selection
+                    templateSelection.classList.add('hidden');
+                    conversationState = 'initial-prompt';
+                    
+                    // Focus on message input
+                    messageInput.focus();
+                });
+            });
+            
+            // Reference section toggle
+            referenceToggleBtn.addEventListener('click', function() {
+                const isCollapsed = referenceContent.classList.contains('collapsed');
+                if (isCollapsed) {
+                    referenceContent.classList.remove('collapsed');
+                    referenceToggle.textContent = '▼';
+                } else {
+                    referenceContent.classList.add('collapsed');
+                    referenceToggle.textContent = '▶';
+                }
+            });
+            
+            function toggleReferenceSection() {
+                referenceContent.classList.toggle('collapsed');
+                referenceToggle.textContent = referenceContent.classList.contains('collapsed') ? '▶' : '▼';
+            }
+            
+            // File handling
+            addFileBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                referenceFileInput.click();
+            });
+            
+            referenceFileInput.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    const file = this.files[0];
+                    uploadedFiles.push(file);
+                    updateFilesList();
+                    this.value = '';
+                }
+            });
+            
+            // Profile image handling
+            addProfileBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                profileFileInput.click();
+            });
+            
+            profileFileInput.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    const file = this.files[0];
+                    if (file.type.startsWith('image/')) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            profileImageData = {
+                                type: 'upload',
+                                data: e.target.result,
+                                name: file.name
+                            };
+                            showProfilePreview(e.target.result);
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        showError('Please select an image file');
+                    }
+                }
+            });
+            
+            profileUrlInput.addEventListener('input', function() {
+                const url = this.value.trim();
+                if (url && (url.startsWith('http://') || url.startsWith('https://'))) {
+                    profileImageData = {
+                        type: 'url',
+                        data: url,
+                        name: 'Profile Image'
+                    };
+                    showProfilePreview(url);
+                } else if (!url) {
+                    clearProfileImage();
+                }
+            });
+            
+            removeProfileBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                clearProfileImage();
+            });
+            
+            function showProfilePreview(src) {
+                profileImgPreview.src = src;
+                profilePreview.classList.remove('hidden');
+            }
+            
+            function clearProfileImage() {
+                profileImageData = null;
+                profileImgPreview.src = '';
+                profileUrlInput.value = '';
+                profilePreview.classList.add('hidden');
+            }
+            
+            function updateFilesList() {
+                filesList.innerHTML = '';
+                uploadedFiles.forEach((file, index) => {
+                    const fileItem = document.createElement('div');
+                    fileItem.className = 'flex items-center justify-between bg-gray-100 p-3 rounded-md';
+                    fileItem.innerHTML = `
+                        <div class=\"flex items-center gap-2\">
+                            <span class=\"text-gray-700\">${file.name}</span>
+                            <span class=\"text-sm text-gray-500\">(${(file.size / 1024).toFixed(2)} KB)</span>
+                        </div>
+                        <button type=\"button\" class=\"remove-file-btn text-red-600 hover:text-red-800 font-bold\" data-index=\"${index}\">✕</button>
+                    `;
+                    filesList.appendChild(fileItem);
+                });
+                
+                document.querySelectorAll('.remove-file-btn').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const index = parseInt(this.dataset.index);
+                        uploadedFiles.splice(index, 1);
+                        updateFilesList();
+                    });
+                });
+                
+                clearFilesBtn.style.display = uploadedFiles.length > 0 ? 'block' : 'none';
+                filesInfo.textContent = uploadedFiles.length > 0 ? `${uploadedFiles.length} file(s) selected` : '';
+            }
+            
+            clearFilesBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                uploadedFiles = [];
+                updateFilesList();
+            });
+            
+            // URL validation
+            referenceUrlInput.addEventListener('change', function() {
+                if (this.value.trim()) {
+                    try {
+                        new URL(this.value);
+                        urlInfo.textContent = `✓ URL added: ${this.value}`;
+                        urlInfo.className = 'text-sm text-green-600 mt-1';
+                    } catch (e) {
+                        urlInfo.textContent = '✗ Invalid URL format';
+                        urlInfo.className = 'text-sm text-red-600 mt-1';
+                        this.value = '';
+                    }
+                } else {
+                    urlInfo.textContent = '';
+                }
+            });
+            
+            // Message functions
+            function addUserMessage(content) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message user-message';
+                messageDiv.innerHTML = `<div class=\"message-content\">${content}</div>`;
+                conversationMessages.appendChild(messageDiv);
+                conversationMessages.scrollTop = conversationMessages.scrollHeight;
+            }
+            
+            function addAIMessage(content) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message ai-message';
+                messageDiv.innerHTML = `<div class=\"message-content\">${content}</div>`;
+                conversationMessages.appendChild(messageDiv);
+                conversationMessages.scrollTop = conversationMessages.scrollHeight;
+            }
+            
+            function addSystemMessage(content) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'system-message';
+                messageDiv.textContent = content;
+                conversationMessages.appendChild(messageDiv);
+                conversationMessages.scrollTop = conversationMessages.scrollHeight;
+            }
+            
+            // Send message handler
+            async function sendMessage() {
+                const message = messageInput.value.trim();
+                
+                if (!message) {
+                    showError('Please enter a message');
+                    return;
+                }
+                
+                if (conversationState === 'template-selection') {
+                    showError('Please select a template first');
+                    return;
+                }
+                
+                // Add user message
+                addUserMessage(message);
+                messageInput.value = '';
+                
+                // Show loader and preview
+                showLoader();
+                
+                try {
+                    let response;
+                    
+                    if (isFirstGeneration) {
+                        // Initial generation
+                        response = await generateWebsite(message);
+                        isFirstGeneration = false;
+                        conversationState = 'conversation';
+                    } else {
+                        // Update existing website
+                        response = await updateWebsite(message);
+                    }
+                    
+                    if (response.success) {
+                        generatedHTML = response.content;
+                        updatePreview(generatedHTML);
+                        addAIMessage('✅ Website updated successfully! Keep telling me what you\'d like to change or add.');
+                    } else {
+                        showError(response.error);
+                    }
+                } catch (error) {
+                    showError('An error occurred. Please try again.');
+                    console.error('Error:', error);
+                } finally {
+                    hideLoader();
+                }
+            }
+            
+            // Generate website
+            async function generateWebsite(message) {
+                const formData = new FormData();
+                formData.append('prompt', message);
+                
+                const selectedTemplate = selectedTemplateInput.value;
+                if (selectedTemplate) {
+                    formData.append('selected_template', selectedTemplate);
+                }
+                
+                const selectedStyle = selectedStyleInput.value;
+                if (selectedStyle) {
+                    formData.append('style_preset', selectedStyle);
+                }
+                if (preferredSectionsInput?.value) {
+                    formData.append('preferred_sections', preferredSectionsInput.value);
+                }
+                if (interactiveEnhancementsInput?.value) {
+                    formData.append('interactive_enhancements', interactiveEnhancementsInput.value);
+                }
+                
+                const referenceUrl = referenceUrlInput.value.trim();
+                if (referenceUrl) {
+                    formData.append('reference_url', referenceUrl);
+                }
+                
+                // Add profile image if available
+                if (profileImageData) {
+                    if (profileImageData.type === 'upload') {
+                        // Convert base64 to blob for upload
+                        const response = await fetch(profileImageData.data);
+                        const blob = await response.blob();
+                        formData.append('profile_image', blob, profileImageData.name);
+                    } else {
+                        // Send URL directly
+                        formData.append('profile_image_url', profileImageData.data);
+                    }
+                }
+                
+                uploadedFiles.forEach(file => {
+                    formData.append('reference_files', file);
+                });
+                
+                const response = await fetch('/generate', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                return await response.json();
+            }
+            
+            // Update website
+            async function updateWebsite(message) {
+                const formData = new FormData();
+                formData.append('current_html', generatedHTML);
+                formData.append('update_prompt', message);
+                formData.append('original_prompt', ''); // Could store this if needed
+                
+                const selectedStyle = selectedStyleInput.value;
+                if (selectedStyle) {
+                    formData.append('style_preset', selectedStyle);
+                }
+                
+                // Include profile image data if available
+                if (profileImageData) {
+                    if (profileImageData.type === 'upload') {
+                        formData.append('profile_image_data', profileImageData.data);
+                        console.log('Including profile image upload data in update request');
+                    } else {
+                        formData.append('profile_image_data', profileImageData.data);
+                        console.log('Including profile image URL in update request');
+                    }
+                }
+                
+                const response = await fetch('/update', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                return await response.json();
+            }
+            
+            // Preview functions
+            function updatePreview(html) {
+                const blob = new Blob([html], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                previewFrame.src = url;
+                
+                previewContainer.classList.add('active');
+                buttonPanel.style.display = 'flex';
+                
+                // Remove blur effect
+                setTimeout(() => {
+                    previewFrame.classList.remove('blurred');
+                }, 300);
+            }
+            
+            function showLoader() {
+                loader.style.display = 'block';
+                errorMessage.classList.add('hidden');
+                
+                if (!previewContainer.classList.contains('active')) {
+                    previewContainer.classList.add('active');
+                    buttonPanel.style.display = 'flex';
+                    previewFrame.classList.add('blurred');
+                }
+                
+                // Show placeholder
+                const placeholderHTML = `
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <style>
+                            body { margin: 0; padding: 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); font-family: Arial, sans-serif; }
+                            .placeholder { background: white; border-radius: 12px; padding: 40px; text-align: center; }
+                            .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #667eea; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 20px auto; }
+                            @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+                            h2 { color: #667eea; margin: 20px 0; }
+                            p { color: #666; }
+                        </style>
+                    </head>
+                    <body>
+                        <div class=\"placeholder\">
+                            <div class=\"spinner\"></div>
+                            <h2>Creating your website...</h2>
+                            <p>Building something amazing for you!</p>
+                        </div>
+                    </body>
+                    </html>
+                `;
+                const blob = new Blob([placeholderHTML], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                previewFrame.src = url;
+            }
+            
+            function hideLoader() {
+                loader.style.display = 'none';
+            }
+            
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.classList.remove('hidden');
+            }
+            
+            // Event listeners
+            sendBtn.addEventListener('click', sendMessage);
+            messageInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+            
+            // Download button
+            downloadBtn.addEventListener('click', function() {
+                if (!generatedHTML) return;
+                
+                const blob = new Blob([generatedHTML], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'generated_website.html';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+            
+            // Open in new window
+            openWindowBtn.addEventListener('click', function() {
+                if (!generatedHTML) return;
+                const blob = new Blob([generatedHTML], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                window.open(url, '_blank');
+            });
+            
+            // New prompt button
+            newPromptBtn.addEventListener('click', function() {
+                // Reset everything
+                generatedHTML = '';
+                uploadedFiles = [];
+                profileImageData = null;
+                isFirstGeneration = true;
+                isRestyling = false;
+                conversationState = 'template-selection';
+                preferredSectionsState = {};
+                preferredSectionsInput.value = '';
+                selectedInteractiveEnhancements = [];
+                syncInteractiveEnhancementCards();
+                filesList.innerHTML = '';
+                filesInfo.textContent = '';
+                templateCards.forEach(c => c.classList.remove('selected'));
+                templateSelection.classList.remove('hidden');
+                referenceUrlInput.value = '';
+                urlInfo.textContent = '';
+                updateFilesList();
+                previewContainer.classList.remove('active');
+                buttonPanel.style.display = 'none';
+                errorMessage.classList.add('hidden');
+                
+                // Reset reference section to expanded state
+                referenceContent.classList.remove('collapsed');
+                referenceToggle.textContent = '▼';
+                
+                // Clear profile image
+                clearProfileImage();
+                
+                // Reset design style
+                setSelectedStyle(defaultStyle);
+                initializePreferredSectionsState();
+                renderComponentPreferences();
+                
+                // Reset conversation
+                conversationMessages.innerHTML = `
+                    <div class=\"welcome-message\">
+                        <div class=\"message ai-message\">
+                            <div class=\"message-content\">
+                                👋 Welcome! I'm your AI website builder. First, choose a template above, then tell me what you'd like to create!
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                messageInput.value = '';
+            });
+        });
+    </script>
+</body>
+</html>

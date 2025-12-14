@@ -1,0 +1,89 @@
+{
+  "brutalist": {
+    "label": "Brutalist Bold",
+    "description": "High-contrast slabs, unapologetic typography, and industrial borders.",
+    "palette": ["#000000", "#f4f4f4", "#ff0054", "#ffd700"],
+    "gradient": "linear-gradient(135deg, #000000, #ff0054)",
+    "fonts": ["Space Grotesk", "Inter"],
+    "mood": ["bold", "architectural", "minimal"],
+    "ui_accents": "thick borders, stark boxes, asymmetric layout",
+    "instructions": "Use high-contrast blocks, unapologetically large typography, and minimal gradients.",
+    "image_prompt": "brutalist architecture inspired website art, sharp contrast lighting",
+    "tags": ["Grid", "Heavy", "Raw"],
+    "preview_heading": "Architect your presence",
+    "preview_copy": "Massive geometry, unapologetic contrast, confident storytelling.",
+    "preview_pills": ["CTA", "Sharp Corners", "Grid"]
+  },
+  "editorial": {
+    "label": "Editorial Luxe",
+    "description": "Magazine-inspired typography with refined spacing and gold accents.",
+    "palette": ["#0f172a", "#f8fafc", "#eab308", "#d4a373"],
+    "gradient": "linear-gradient(135deg, #0f172a, #eab308)",
+    "fonts": ["Playfair Display", "Source Sans Pro"],
+    "mood": ["refined", "magazine-like", "balanced"],
+    "ui_accents": "generous whitespace, split layouts, illustrated drop caps",
+    "instructions": "Emphasize large serif headlines, slim rules, and luxe editorial callouts.",
+    "image_prompt": "editorial magazine layout with gold accents, soft lighting",
+    "tags": ["Columns", "Serif", "Feature"]
+  },
+  "neomorphism": {
+    "label": "Neo-morphism Glow",
+    "description": "Soft layered cards, pill buttons, and gentle gradients with tactile depth.",
+    "palette": ["#ecf0f3", "#cfd8dc", "#5c6ac4", "#7c3aed"],
+    "gradient": "linear-gradient(135deg, #ecf0f3, #5c6ac4)",
+    "fonts": ["Poppins", "Nunito"],
+    "mood": ["soft", "tactile", "futuristic"],
+    "ui_accents": "pill buttons, floating cards, diffused drop shadows",
+    "instructions": "Use layered cards with soft drop shadows, rounded corners, and gentle gradients.",
+    "image_prompt": "neumorphic interface render, glowing buttons, soft focus",
+    "tags": ["Glow", "Pills", "Haptic"]
+  },
+  "vaporwave": {
+    "label": "Vaporwave Neon",
+    "description": "Dreamy retro grids, neon gradients, and chrome-glitch UI flourishes.",
+    "palette": ["#0f0c29", "#302b63", "#f72585", "#4cc9f0"],
+    "gradient": "linear-gradient(135deg, #0f0c29, #f72585)",
+    "fonts": ["Press Start 2P", "Roboto Mono"],
+    "mood": ["retro", "dreamy", "electric"],
+    "ui_accents": "scanlines, chrome gradients, neon grids",
+    "instructions": "Lean into nostalgic 80s neon, grain overlays, and playful glitch dividers.",
+    "image_prompt": "vaporwave cityscape, neon gradients, retro futurism",
+    "tags": ["Retro", "Glow", "Glitch"]
+  },
+  "high_contrast_minimal": {
+    "label": "High-Contrast Minimal",
+    "description": "Surgical spacing, monochrome surfaces, and one bold accent hue.",
+    "palette": ["#111111", "#ffffff", "#ff531a", "#c0c0c0"],
+    "gradient": "linear-gradient(135deg, #111111, #333333)",
+    "fonts": ["Syne", "Work Sans"],
+    "mood": ["sharp", "precise", "modern"],
+    "ui_accents": "razor-thin rules, monochrome cards, surgical spacing",
+    "instructions": "Stick to monochrome planes with one punchy accent and crisp modular spacing.",
+    "image_prompt": "monochrome fashion layout with vibrant accent line",
+    "tags": ["Monochrome", "Focus", "Precision"]
+  },
+  "artisan": {
+    "label": "Warm Artisan",
+    "description": "Handcrafted storytelling with textured layers and warm film tones.",
+    "palette": ["#2c1810", "#f7ede2", "#f28482", "#c97c5d"],
+    "gradient": "linear-gradient(135deg, #2c1810, #f28482)",
+    "fonts": ["Cormorant Garamond", "Work Sans"],
+    "mood": ["warm", "craft-focused", "story-driven"],
+    "ui_accents": "textured backgrounds, deckled dividers, layered cards",
+    "instructions": "Combine organic shapes, textured paper effects, and editorial storytelling modules.",
+    "image_prompt": "artisan studio photography, warm film tones, handcrafted details",
+    "tags": ["Handmade", "Texture", "Story"]
+  },
+  "midnight_glow": {
+    "label": "Midnight Glow",
+    "description": "Cinematic glassmorphism with cosmic gradients and luminous outlines.",
+    "palette": ["#050816", "#1f2933", "#06b6d4", "#a855f7"],
+    "gradient": "linear-gradient(135deg, #050816, #a855f7)",
+    "fonts": ["Sora", "Inter"],
+    "mood": ["cosmic", "cinematic", "sleek"],
+    "ui_accents": "glassmorphism panels, starfield dots, animated glows",
+    "instructions": "Use deep space backgrounds, luminous outlines, and glass cards with neon borders.",
+    "image_prompt": "futuristic interface in deep space palette, glowing edges",
+    "tags": ["Cosmic", "Glass", "Pulse"]
+  }
+}

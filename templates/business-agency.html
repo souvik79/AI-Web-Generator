@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechFlow - Digital Agency</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-md z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 hero-gradient rounded-lg flex items-center justify-center">
+                        <i class="fas fa-rocket text-white"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-gray-800">TechFlow</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#services" class="text-gray-600 hover:text-purple-600 transition">Services</a>
+                    <a href="#portfolio" class="text-gray-600 hover:text-purple-600 transition">Portfolio</a>
+                    <a href="#about" class="text-gray-600 hover:text-purple-600 transition">About</a>
+                    <a href="#contact" class="text-gray-600 hover:text-purple-600 transition">Contact</a>
+                    <button class="hero-gradient text-white px-6 py-2 rounded-full hover:shadow-lg transition">
+                        Get Started
+                    </button>
+                </div>
+                <button class="md:hidden text-gray-600">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-20 pb-16 px-6">
+        <div class="container mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center min-h-[80vh]">
+                <div class="space-y-8">
+                    <div class="inline-flex items-center bg-purple-100 rounded-full px-4 py-2 text-sm">
+                        <span class="w-2 h-2 bg-purple-600 rounded-full mr-2 animate-pulse"></span>
+                        Available for new projects
+                    </div>
+                    <h1 class="text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
+                        We Build <span class="gradient-text">Digital Solutions</span> That Drive Growth
+                    </h1>
+                    <p class="text-xl text-gray-600 leading-relaxed">
+                        Transform your business with cutting-edge web development, 
+                        stunning design, and data-driven marketing strategies.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="hero-gradient text-white px-8 py-4 rounded-full hover:shadow-xl transition">
+                            Start Your Project
+                        </button>
+                        <button class="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-full hover:bg-purple-50 transition">
+                            View Our Work
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-8">
+                        <div>
+                            <p class="text-3xl font-bold text-gray-900">150+</p>
+                            <p class="text-gray-600">Projects Completed</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-gray-900">98%</p>
+                            <p class="text-gray-600">Client Satisfaction</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-gray-900">24/7</p>
+                            <p class="text-gray-600">Support Available</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="absolute inset-0 hero-gradient rounded-3xl opacity-10 blur-3xl"></div>
+                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&h=400&fit=crop" 
+                         alt="Team working" 
+                         class="rounded-3xl shadow-2xl relative z-10">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 px-6 bg-white">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Comprehensive digital solutions to help your business thrive in the modern landscape
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card-hover bg-gray-50 p-8 rounded-2xl">
+                    <div class="w-16 h-16 hero-gradient rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-code text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Web Development</h3>
+                    <p class="text-gray-600 mb-6">
+                        Custom web applications built with modern technologies 
+                        and best practices for optimal performance.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><i class="fas fa-check text-purple-600 mr-2"></i>React & Vue.js</li>
+                        <li><i class="fas fa-check text-purple-600 mr-2"></i>Node.js & Python</li>
+                        <li><i class="fas fa-check text-purple-600 mr-2"></i>Progressive Web Apps</li>
+                    </ul>
+                </div>
+                <div class="card-hover bg-gray-50 p-8 rounded-2xl">
+                    <div class="w-16 h-16 hero-gradient rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-palette text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">UI/UX Design</h3>
+                    <p class="text-gray-600 mb-6">
+                        Beautiful, intuitive designs that delight users and 
+                        drive engagement across all platforms.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><i class="fas fa-check text-purple-600 mr-2"></i>User Research</li>
+                        <li><i class="fas fa-check text-purple-600 mr-2"></i>Prototyping</li>
+                        <li><i class="fas fa-check text-purple-600 mr-2"></i>Design Systems</li>
+                    </ul>
+                </div>
+                <div class="card-hover bg-gray-50 p-8 rounded-2xl">
+                    <div class="w-16 h-16 hero-gradient rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Digital Marketing</h3>
+                    <p class="text-gray-600 mb-6">
+                        Data-driven marketing strategies that increase 
+                        visibility and drive measurable results.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><i class="fas fa-check text-purple-600 mr-2"></i>SEO Optimization</li>
+                        <li><i class="fas fa-check text-purple-600 mr-2"></i>Content Strategy</li>
+                        <li><i class="fas fa-check text-purple-600 mr-2"></i>Analytics & Reporting</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 px-6">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Recent Projects</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Explore our latest work and see how we've helped businesses achieve their goals
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="group relative overflow-hidden rounded-2xl shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=300&fit=crop" 
+                         alt="E-commerce Platform" 
+                         class="w-full h-64 object-cover group-hover:scale-110 transition duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition duration-300">
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <h3 class="text-xl font-bold mb-2">E-commerce Platform</h3>
+                            <p class="text-sm opacity-90">Modern online shopping experience</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="group relative overflow-hidden rounded-2xl shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1559028012-c646e8258fbc?w=400&h=300&fit=crop" 
+                         alt="SaaS Dashboard" 
+                         class="w-full h-64 object-cover group-hover:scale-110 transition duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition duration-300">
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <h3 class="text-xl font-bold mb-2">SaaS Dashboard</h3>
+                            <p class="text-sm opacity-90">Analytics and management platform</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="group relative overflow-hidden rounded-2xl shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop" 
+                         alt="Mobile App" 
+                         class="w-full h-64 object-cover group-hover:scale-110 transition duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition duration-300">
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <h3 class="text-xl font-bold mb-2">Mobile App</h3>
+                            <p class="text-sm opacity-90">iOS and Android application</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-6">
+        <div class="container mx-auto">
+            <div class="hero-gradient rounded-3xl p-12 text-center text-white">
+                <h2 class="text-4xl font-bold mb-6">Ready to Start Your Project?</h2>
+                <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+                    Let's discuss how we can help transform your business with innovative digital solutions
+                </p>
+                <button class="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold hover:shadow-xl transition">
+                    Get Free Consultation
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-6">
+        <div class="container mx-auto">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                            <i class="fas fa-rocket text-purple-600"></i>
+                        </div>
+                        <span class="text-2xl font-bold">TechFlow</span>
+                    </div>
+                    <p class="text-gray-400">
+                        Building digital experiences that matter.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Web Development</a></li>
+                        <li><a href="#" class="hover:text-white transition">UI/UX Design</a></li>
+                        <li><a href="#" class="hover:text-white transition">Digital Marketing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">Portfolio</a></li>
+                        <li><a href="#" class="hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-purple-600 transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-purple-600 transition">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-purple-600 transition">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 TechFlow. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

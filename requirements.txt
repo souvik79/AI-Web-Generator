@@ -1,0 +1,17 @@
+# requirements.txt  (only the top part shown)
+flask==2.0.1
+werkzeug==2.3.0          # ← keep this exact pin
+
+langchain==0.2.11
+langchain-core==0.2.36
+langchain-community==0.2.9
+langchain-openai==0.1.14
+langchain-anthropic==0.1.13
+langchain-google-genai==1.0.6
+
+pydantic==2.12.4
+python-dotenv==1.0.0
+requests==2.31.0
+
+google-generativeai==0.5.4
+pytest==8.3.3

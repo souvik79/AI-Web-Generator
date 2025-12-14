@@ -1,0 +1,134 @@
+{
+  "hero": {
+    "label": "Hero Sections",
+    "description": "Above-the-fold intros that mix bold headlines, supporting copy, CTAs, and immersive visuals.",
+    "variants": [
+      {
+        "id": "hero_split_image",
+        "name": "Split Layout",
+        "layout": "Two-column grid with copy on the left and layered imagery/device mockups on the right.",
+        "content_focus": ["Headline", "Value bullets", "Primary + secondary CTA", "Stats row"],
+        "visual_notes": "Use gradient accent behind the image, add floating stat cards, keep copy width ~560px.",
+        "best_for": ["saas", "agency", "product"],
+        "css_primitives": ["grid", "gradient-background", "rounded-3xl", "shadow-2xl"]
+      },
+      {
+        "id": "hero_centered_card",
+        "name": "Centered Spotlight",
+        "layout": "Full-width hero with centered text stack and floating product card carousel.",
+        "content_focus": ["Emotive subheading", "Large headline", "Single CTA", "Trust badges"],
+        "visual_notes": "Apply glassmorphism card for gallery, fade background with radial gradient, use subtle motion cues.",
+        "best_for": ["portfolio", "creative", "commerce"],
+        "css_primitives": ["flex", "backdrop-blur", "radial-gradient", "scale-on-hover"]
+      },
+      {
+        "id": "hero_story_panel",
+        "name": "Story Panel",
+        "layout": "Text column with conversational copy + stacked proof bars next to vertical imagery strip.",
+        "content_focus": ["Narrative intro", "Quote callout", "CTA pair", "Client logos"],
+        "visual_notes": "Use serif headline + sans body, include vertical accent line, add subtle texture background.",
+        "best_for": ["artisan", "services", "editorial"],
+        "css_primitives": ["flex", "border-l-4", "bg-texture", "italic-quote"]
+      }
+    ]
+  },
+  "testimonials": {
+    "label": "Testimonials",
+    "description": "Social proof layouts to build trust.",
+    "variants": [
+      {
+        "id": "testimonials_cards",
+        "name": "Card Grid",
+        "layout": "Responsive grid of testimonial cards with star ratings and avatar row.",
+        "content_focus": ["Quote", "Star rating", "Avatar", "Role/company"],
+        "visual_notes": "Alternate background tints, include quotation marks, highlight featured quote with accent border.",
+        "best_for": ["saas", "agency", "product"],
+        "css_primitives": ["grid", "rounded-2xl", "shadow-md", "accent-border"]
+      },
+      {
+        "id": "testimonials_carousel",
+        "name": "Carousel",
+        "layout": "Full-width slider with one expanded quote and thumbnail navigation.",
+        "content_focus": ["Long-form story", "KPI badge", "Avatar with brand"],
+        "visual_notes": "Use faux slider controls, add gradient halo behind avatar, animate transitions subtly.",
+        "best_for": ["enterprise", "services"],
+        "css_primitives": ["overflow-hidden", "translate-x", "gradient-border", "pill-controls"]
+      },
+      {
+        "id": "testimonials_timeline",
+        "name": "Timeline Praise",
+        "layout": "Vertical timeline where each milestone includes client praise.",
+        "content_focus": ["Date", "Milestone title", "Quote snippet"],
+        "visual_notes": "Use timeline dots/glow, connect lines with gradient stroke, pair with KPI chips.",
+        "best_for": ["case-study", "professional services"],
+        "css_primitives": ["timeline", "glow-dot", "grad-line", "kpi-chip"]
+      }
+    ]
+  },
+  "pricing": {
+    "label": "Pricing Tables",
+    "description": "Package comparisons with highlighted plan.",
+    "variants": [
+      {
+        "id": "pricing_three_tiers",
+        "name": "Three Tiers",
+        "layout": "Three-column cards with middle plan elevated and badge.",
+        "content_focus": ["Plan name", "Price", "Feature list", "CTA"],
+        "visual_notes": "Scale featured card, add badge chip, include toggle for monthly/annual CTA stub.",
+        "best_for": ["saas", "platforms"],
+        "css_primitives": ["grid-cols-3", "featured-scale", "badge-chip", "icon-list"]
+      },
+      {
+        "id": "pricing_comparison",
+        "name": "Comparison Table",
+        "layout": "Table layout with features on rows and plans as columns.",
+        "content_focus": ["Feature rows", "Checkmarks", "CTA row"],
+        "visual_notes": "Sticky plan labels, zebra striping, highlight differences with icons.",
+        "best_for": ["enterprise", "b2b"],
+        "css_primitives": ["table", "sticky-top", "zebra-row", "icon-badge"]
+      },
+      {
+        "id": "pricing_cards_split",
+        "name": "Card Split",
+        "layout": "Two cards (Starter vs Pro) with detailed perks and testimonial snippet.",
+        "content_focus": ["Audience label", "Price", "Pain point solution", "Quote"],
+        "visual_notes": "Use diagonal gradient divider, include mini quote, animate hover lift.",
+        "best_for": ["consulting", "freelancers", "boutique"],
+        "css_primitives": ["flex", "diagonal-gradient", "quote-mark", "hover-lift"]
+      }
+    ]
+  },
+  "timeline": {
+    "label": "Timeline / Process",
+    "description": "Steps or milestones to explain journey or roadmap.",
+    "variants": [
+      {
+        "id": "timeline_steps_horizontal",
+        "name": "Horizontal Steps",
+        "layout": "Row of numbered steps with icons and short description.",
+        "content_focus": ["Step number", "Title", "One-liner"],
+        "visual_notes": "Connect with gradient line, use circular icons, highlight current step.",
+        "best_for": ["product", "onboarding"],
+        "css_primitives": ["flex", "step-line", "number-badge", "smoke-bg"]
+      },
+      {
+        "id": "timeline_vertical_cards",
+        "name": "Vertical Cards",
+        "layout": "Stacked cards along a vertical line with alternating alignment.",
+        "content_focus": ["Date", "Title", "Rich description", "CTA link"],
+        "visual_notes": "Alternate left/right alignment, add soft shadows, include connectors.",
+        "best_for": ["agency", "case-study", "education"],
+        "css_primitives": ["timeline", "shadow-lg", "connector-line", "accent-dot"]
+      },
+      {
+        "id": "timeline_featured_milestones",
+        "name": "Featured Milestones",
+        "layout": "Minimal timeline with large numerals and supporting media thumbnails.",
+        "content_focus": ["Milestone number", "Headline", "Media chip"],
+        "visual_notes": "Use oversized typography, embed media chip (image/vid), fade connectors.",
+        "best_for": ["creative", "artisan", "brand story"],
+        "css_primitives": ["grid", "oversized-type", "media-chip", "fade-line"]
+      }
+    ]
+  }
+}
